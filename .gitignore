@@ -1,5 +1,6 @@
 # Xcode
 build/
+!NetMonitor.app.zip
 DerivedData/
 *.xcuserstate
 *.xcworkspace
