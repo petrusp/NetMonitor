@@ -118,6 +118,11 @@ class NetworkMonitor {
                 bytesOut: current.bytesOut
             )
 
+            // Track new interfaces that appear after app start
+            if initialStats[name] == nil {
+                initialStats[name] = current
+            }
+
             if let previous = previousStats[name] {
                 // Handle counter overflow/reset
                 let bytesInDiff = current.bytesIn >= previous.bytesIn
