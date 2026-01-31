@@ -19,8 +19,12 @@ A lightweight macOS menu bar app that displays real-time network upload and down
 ### Download Release
 1. Download the latest `NetMonitor.app.zip` from [Releases](https://github.com/petrusp/NetMonitor/releases)
 2. Unzip and drag `NetMonitor.app` to your Applications folder
-3. Launch NetMonitor from Applications
-4. (Optional) Add to Login Items to start automatically
+3. Run this command in Terminal to allow the app to open:
+   ```
+   xattr -cr /Applications/NetMonitor.app
+   ```
+4. Launch NetMonitor from Applications
+5. (Optional) Add to Login Items to start automatically
 
 ### Build from Source
 ```bash
