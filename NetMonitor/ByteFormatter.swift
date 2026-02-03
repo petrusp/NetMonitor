@@ -43,6 +43,35 @@ struct ByteFormatter {
         }
     }
 
+    /// Format bytes per second into fixed-width speed string for status bar (right-aligned)
+    /// Uses KB/s as minimum unit to maintain consistent width
+    static func formatSpeedFixedWidth(_ bytesPerSecond: Double, width: Int = 9) -> String {
+        let units = ["KB/s", "MB/s", "GB/s"]
+        var value = bytesPerSecond / 1024  // Start at KB/s
+        var unitIndex = 0
+
+        while value >= 1024 && unitIndex < units.count - 1 {
+            value /= 1024
+            unitIndex += 1
+        }
+
+        let speed: String
+        if value < 0.01 {
+            speed = "0 KB/s"
+        } else if value >= 100 {
+            speed = String(format: "%.0f %@", value, units[unitIndex])
+        } else if value >= 10 {
+            speed = String(format: "%.1f %@", value, units[unitIndex])
+        } else {
+            speed = String(format: "%.2f %@", value, units[unitIndex])
+        }
+
+        if speed.count < width {
+            return String(repeating: " ", count: width - speed.count) + speed
+        }
+        return speed
+    }
+
     /// Format duration in seconds to human-readable (e.g., "2h 15m")
     static func formatDuration(_ seconds: TimeInterval) -> String {
         let hours = Int(seconds) / 3600

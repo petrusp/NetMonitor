@@ -41,7 +41,7 @@ class StatusBarController {
                 .baselineOffset: -4
             ]
 
-            let text = "↑ --\n↓ --"
+            let text = "↑    0 KB/s\n↓    0 KB/s"
             button.attributedTitle = NSAttributedString(string: text, attributes: attributes)
         }
     }
@@ -102,8 +102,9 @@ class StatusBarController {
     /// Update the status bar and menu with current stats
     func update() {
         // Update status bar title with vertical layout
-        let upSpeed = ByteFormatter.formatSpeed(networkMonitor.totalSpeedOut)
-        let downSpeed = ByteFormatter.formatSpeed(networkMonitor.totalSpeedIn)
+        // Use fixed-width formatting to prevent jumping
+        let upSpeed = ByteFormatter.formatSpeedFixedWidth(networkMonitor.totalSpeedOut)
+        let downSpeed = ByteFormatter.formatSpeedFixedWidth(networkMonitor.totalSpeedIn)
 
         if let button = statusItem.button {
             let style = NSMutableParagraphStyle()
